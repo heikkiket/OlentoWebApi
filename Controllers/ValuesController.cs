@@ -9,18 +9,22 @@ namespace OlentoWebApi.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-        // GET api/values
+        // GET api/values?x=5&y=3
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<string> Get(uint x = 0, uint y = 0)
         {
-            return new string[] { "value1", "value2", "value3" };
-        }
-
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
+			//lasketaan väri koordinaattien mukaan
+			uint r = x;
+			uint g = y;
+			uint b = x + y;
+			
+			//värin rajatarkistus: r, g, b = {0...255}
+			if(r > 255)	r = 255;
+			if(g > 255)	g = 255;
+			if(b > 255)	b = 255;
+        
+			//palautetaan väri json-muodossa
+            return new string[] { "r:" + r.ToString(), "g:" + g.ToString(), "b:" + b.ToString() };
         }
 
         // POST api/values
