@@ -2,10 +2,12 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
     <StartAction>Project</StartAction>
+    <StartProgram>dotnet-run</StartProgram>
+    <StartWorkingDirectory>.</StartWorkingDirectory>
     <EnvironmentVariables>
       <Variable name="ASPNETCORE_ENVIRONMENT" value="Development" xmlns="" />
     </EnvironmentVariables>
-    <ApplicationURL>http://localhost:39889</ApplicationURL>
+    <ApplicationURL>http://localhost:5000</ApplicationURL>
     <LaunchUrl></LaunchUrl>
   </PropertyGroup>
 </Project>

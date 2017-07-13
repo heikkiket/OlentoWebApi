@@ -38,6 +38,7 @@ namespace OlentoWebApi
             loggerFactory.AddDebug();
 
             app.UseMvc();
+            app.UseStaticFiles();
         }
     }
 }
