@@ -1,11 +1,30 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
     <meta charset="utf-8" />
-    <title></title>
+    <title>Olento API test</title>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$("#testButton").click(function () {
+		    $('#values').load("/api/values");
+		});
+	});
+    $(document).ready(function(){
+        $("#valueButton").click(function () {
+            //$('#values').load("/api/values/" . this.attr("value"));
+			alert($(this).attr("value"));
+        });
+    });
+    </script>
 </head>
 <body>
 	<h1>Testi</h1>
-    <button id="test">Testi</button>
+	<p id="values"></p>
+    <button id="testButton">Get values</button>
+	<button id="valueButton" value="1">Value1</button>
+	<button id="valueButton" value="2">Value2</button>
+	<button id="valueButton" value="3">Value3</button>
 </body>
 </html>
