@@ -9,17 +9,7 @@
 		$("#testButton").click(function () {
 		    $('#values').load("/api/values");
 		});
-
-		$("#dataButton").click(function () {
-		$.get( "/api/values", {x: $('#x_input').val(), y: $('#y_input').val()} )
-			.done(function( data ) {
-			    var color = JSON.parse(data);
-			    r = color.r;
-			    g = color.g;
-			    b = color.b;
-			});
-	    });
-	});
+        });
     </script>
 
 </head>
@@ -51,13 +41,35 @@
             context.clearRect(0, 0, canvasWidth, canvasHeight);
             
             
-            context.fillStyle = 'red';
-            context.fillRect(50, 50, 200, 100);
             context.fillStyle = 'rgb(' + r + ',' + g + ',' + b + ')';
-            context.fillRect(50, 50, 200, 100);
+            context.fillRect(0, 0, canvasWidth, canvasHeight);
                 
             requestAnimationFrame(draw);
         }
+        
+        function getMousePos(canvas, evt) {
+            var rect = canvas.getBoundingClientRect();
+            return {
+            x: evt.clientX - rect.left,
+            y: evt.clientY - rect.top
+            };
+        }
+        
+        drawCanvas.addEventListener('mousemove', function(evt) {
+            var mousePos = getMousePos(drawCanvas, evt);
+            getCoords(mousePos.x, mousePos.y);
+        }, false);
+        
+        function getCoords(x, y) {
+            $.get( "/api/values", {x: x, y: y} )
+            .done(function( data ) {
+                var color = JSON.parse(data);
+                r = color.r;
+                g = color.g;
+                b = color.b;
+            });
+        }
+        
         
         draw();
     </script>
