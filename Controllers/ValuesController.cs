@@ -4,15 +4,29 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace OlentoWebApi.Controllers
 {
-    [Route("api/[controller]")]
+	[Route("api/[controller]")]
     public class ValuesController : Controller
     {
-        // GET api/values?x=5&y=3
-        [HttpGet]
-        public IEnumerable<string> Get(uint x = 0, uint y = 0)
-        {
+
+		//tee väristä JSON-objekti
+		string rgbAsJSON(uint r, uint g, uint b) {
+			return(
+				"{"
+				+ "\"r\":" + r.ToString() + ", "
+				+ "\"g\":" + g.ToString() + ", "
+				+ "\"b\":" + b.ToString()
+				+ "}"
+				);
+		}
+
+		
+		//esim. GET api/values?x=5&y=3
+		[HttpGet]
+		public string Get(uint x = 0, uint y = 0)
+		{
 			//lasketaan väri koordinaattien mukaan
 			uint r = x;
 			uint g = y;
@@ -22,27 +36,30 @@ namespace OlentoWebApi.Controllers
 			if(r > 255)	r = 255;
 			if(g > 255)	g = 255;
 			if(b > 255)	b = 255;
-        
+
 			//palautetaan väri json-muodossa
-            return new string[] { "r:" + r.ToString(), "g:" + g.ToString(), "b:" + b.ToString() };
-        }
+			return rgbAsJSON(r,g,b);
+		}
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
+		
+		//esim. POST api/values
+		[HttpPost]
+		public void Post([FromBody]string value)
+		{
+		}
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+		
+		//esim. PUT api/values/5
+		[HttpPut("{id}")]
+		public void Put(int id, [FromBody]string value)
+		{
+		}
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-    }
+		
+		//esim. DELETE api/values/5
+		[HttpDelete("{id}")]
+		public void Delete(int id)
+		{
+		}
+	}
 }
