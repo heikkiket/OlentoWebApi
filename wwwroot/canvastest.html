@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>CanvasTest</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+    <script type="text/javascript">
+	$(document).ready(function(){
+		$("#testButton").click(function () {
+		    $('#values').load("/api/values");
+		});
+
+		$("#dataButton").click(function () {
+		$.get( "/api/values", {x: $('#x_input').val(), y: $('#y_input').val()} )
+			.done(function( data ) {
+			    var color = JSON.parse(data);
+			    r = color.r;
+			    g = color.g;
+			    b = color.b;
+			});
+	    });
+	});
+    </script>
+
+</head>
+<body>
+	<a href="test.html">API-testi</a>
+	<h1>Canvas-testi</h1>
+        <canvas id="drawCanvas" width="640" height="480">
+	</canvas>
+
+    <script>
+    
+        var drawCanvas = document.getElementById('drawCanvas');
+        var context = drawCanvas.getContext('2d');
+        
+        var canvasWidth = drawCanvas.width;
+        var canvasHeight = drawCanvas.height;
+        
+        var r = 0;
+        var g = 0;
+        var b = 0;
+    
+        var requestAnimationFrame = window.requestAnimationFrame || 
+                            window.mozRequestAnimationFrame || 
+                            window.webkitRequestAnimationFrame || 
+                            window.msRequestAnimationFrame;
+    
+        function draw() {
+            
+            context.clearRect(0, 0, canvasWidth, canvasHeight);
+            
+            
+            context.fillStyle = 'red';
+            context.fillRect(50, 50, 200, 100);
+            context.fillStyle = 'rgb(' + r + ',' + g + ',' + b + ')';
+            context.fillRect(50, 50, 200, 100);
+                
+            requestAnimationFrame(draw);
+        }
+        
+        draw();
+    </script>
+</body>
+</html>

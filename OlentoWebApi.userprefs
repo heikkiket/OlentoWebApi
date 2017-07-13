@@ -1,7 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workbench ActiveDocument="OlentoWebApi Status">
     <Files>
-      <File FileName="wwwroot/test.html" Line="17" Column="34" />
       <File FileName="Controllers/ValuesController.cs" Line="10" Column="46" />
       <File FileName="Program.cs" Line="1" Column="1" />
       <File FileName="Startup.cs" Line="1" Column="1" />
