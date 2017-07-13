@@ -1,0 +1,9 @@
+/home/heikki/public_html/olento/dotnet/OlentoWebApi/bin/Debug/netcoreapp1.1/OlentoWebApi.deps.json
+/home/heikki/public_html/olento/dotnet/OlentoWebApi/bin/Debug/netcoreapp1.1/OlentoWebApi.runtimeconfig.json
+/home/heikki/public_html/olento/dotnet/OlentoWebApi/bin/Debug/netcoreapp1.1/OlentoWebApi.runtimeconfig.dev.json
+/home/heikki/public_html/olento/dotnet/OlentoWebApi/bin/Debug/netcoreapp1.1/OlentoWebApi.dll
+/home/heikki/public_html/olento/dotnet/OlentoWebApi/bin/Debug/netcoreapp1.1/OlentoWebApi.pdb
+/home/heikki/public_html/olento/dotnet/OlentoWebApi/obj/Debug/netcoreapp1.1/OlentoWebApi.csprojResolveAssemblyReference.cache
+/home/heikki/public_html/olento/dotnet/OlentoWebApi/obj/Debug/netcoreapp1.1/OlentoWebApi.AssemblyInfo.cs
+/home/heikki/public_html/olento/dotnet/OlentoWebApi/obj/Debug/netcoreapp1.1/OlentoWebApi.dll
+/home/heikki/public_html/olento/dotnet/OlentoWebApi/obj/Debug/netcoreapp1.1/OlentoWebApi.pdb
