@@ -57,13 +57,14 @@
         
         drawCanvas.addEventListener('mousemove', function(evt) {
             var mousePos = getMousePos(drawCanvas, evt);
-            getCoords(mousePos.x, mousePos.y);
+            getColor(mousePos.x, mousePos.y);
         }, false);
         
-        function getCoords(x, y) {
-            $.get( "/api/values", {x: x, y: y} )
+        function getColor(x, y) {
+            $.get( "/api/values", {x: x, y: y|0} )
             .done(function( data ) {
                 var color = JSON.parse(data);
+                console.log("x: " + x + "y:" + y + "c:" + data);
                 r = color.r;
                 g = color.g;
                 b = color.b;
