@@ -28,8 +28,8 @@ namespace OlentoWebApi.Controllers
         {
             //lasketaan väri koordinaattien mukaan
             uint r = (uint)x;
-            uint b = (uint)y;
-            uint g = r + b;
+            uint g = (uint)y;
+            uint b = r + g;
             
             //värin rajatarkistus: r, g, b = {0...255}
             if(r > 255)	r = 255;
