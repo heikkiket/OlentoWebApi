@@ -3,13 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using OlentoWebApi.Models;
 
 
 namespace OlentoWebApi.Controllers
 {
-    [Route("api/[controller]")]
+	
+    [Route("[controller]")]
     public class ValuesController : Controller
     {
+
+		private readonly ValuesContext _context;
+
+		public ValuesController(ValuesContext context)
+		{
+			_context = context;
+
+			//if (_context.ValuesItems.Count() == 0)
+			//{
+			//	_context.ValuesItems.Add(new ValuesItem { x = 0 });
+			//	_context.SaveChanges();
+			//}
+		}
+
         //tee väristä JSON-objekti
         string rgbAsJSON(uint r, uint g, uint b) {
             return(
@@ -22,7 +38,7 @@ namespace OlentoWebApi.Controllers
         }
         
         
-        //esim. GET api/values?x=5&y=3
+        //esim. GET values?x=5&y=3
         [HttpGet]
         public string Get(float x = 0, float y = 0)
         {
