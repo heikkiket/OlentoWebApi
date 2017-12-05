@@ -48,12 +48,12 @@ namespace OlentoWebApi.Controllers
 					var item = _context.ValuesItems.FirstOrDefault(t => t.Id == id);
 					if (item == null)
 					{
-						return notFound();
+						return NotFound();
 					}
 					return new ObjectResult(item);
 				}
 
-        //esim. GET values?x=5&y=3
+        //esim. GET values/single?x=5&y=3
         [HttpGet("/single")]
         public string GetByCoords(float x = 0, float y = 0)
         {
