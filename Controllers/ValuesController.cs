@@ -8,7 +8,7 @@ using OlentoWebApi.Models;
 
 namespace OlentoWebApi.Controllers
 {
-	
+
     [Route("[controller]")]
     public class ValuesController : Controller
     {
@@ -19,11 +19,11 @@ namespace OlentoWebApi.Controllers
 		{
 			_context = context;
 
-			//if (_context.ValuesItems.Count() == 0)
-			//{
-			//	_context.ValuesItems.Add(new ValuesItem { x = 0 });
-			//	_context.SaveChanges();
-			//}
+			if (_context.ValuesItems.Count() == 0)
+			{
+				_context.ValuesItems.Add(new ValuesItem { x = 42 });
+				_context.SaveChanges();
+			}
 		}
 
         //tee väristä JSON-objekti
@@ -36,17 +36,32 @@ namespace OlentoWebApi.Controllers
                 + "}"
                 );
         }
-        
-        
+
+				[HttpGet]
+				public IEnumerable<ValuesItem> GetAll()
+				{
+				    return _context.ValuesItems.ToList();
+				}
+
+				[HttpGet("/single/{id}", Name = "GetValues")]
+				public IActionResult GetById(long id) {
+					var item = _context.ValuesItems.FirstOrDefault(t => t.Id == id);
+					if (item == null)
+					{
+						return notFound();
+					}
+					return new ObjectResult(item);
+				}
+
         //esim. GET values?x=5&y=3
-        [HttpGet]
-        public string Get(float x = 0, float y = 0)
+        [HttpGet("/single")]
+        public string GetByCoords(float x = 0, float y = 0)
         {
             //lasketaan väri koordinaattien mukaan
             uint r = (uint)x;
             uint g = (uint)y;
             uint b = r + g;
-            
+
             //värin rajatarkistus: r, g, b = {0...255}
             if(r > 255)	r = 255;
             if(g > 255)	g = 255;
@@ -55,5 +70,19 @@ namespace OlentoWebApi.Controllers
             //palautetaan väri json-muodossa
             return rgbAsJSON(r,g,b);
         }
-    }
+
+				[HttpPost]
+				public IActionResult Create([FromBody] ValuesItem item)
+				{
+					if (item == null)
+					{
+						return BadRequest();
+					}
+
+					_context.ValuesItems.Add(item);
+					_context.SaveChanges();
+
+					return CreatedAtRoute("GetValue", new { id = item.Id }, item);
+				}
+			}
 }

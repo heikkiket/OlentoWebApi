@@ -3,7 +3,7 @@ namespace OlentoWebApi.Models
 {
     public class ValuesItem
     {
-        public long id { get; set; }
+        public long Id { get; set; }
         public uint x { get; set; }
         public uint y { get; set; }
 
