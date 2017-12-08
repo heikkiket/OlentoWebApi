@@ -43,7 +43,7 @@ namespace OlentoWebApi.Controllers
 				    return _context.ValuesItems.ToList();
 				}
 
-				[HttpGet("/single/{id}", Name = "GetValues")]
+				[HttpGet("single/{id}", Name = "GetValues")]
 				public IActionResult GetById(long id) {
 					var item = _context.ValuesItems.FirstOrDefault(t => t.Id == id);
 					if (item == null)
@@ -54,7 +54,7 @@ namespace OlentoWebApi.Controllers
 				}
 
         //esim. GET values/single?x=5&y=3
-        [HttpGet("/single")]
+        [HttpGet("single")]
         public string GetByCoords(float x = 0, float y = 0)
         {
             //lasketaan väri koordinaattien mukaan
