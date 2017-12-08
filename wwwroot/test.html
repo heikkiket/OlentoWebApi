@@ -1,18 +1,18 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <meta charset="utf-8" />
     <title>Olento API test</title>
 
 	<script type="text/javascript">
 	$(document).ready(function(){
 		$("#testButton").click(function () {
-		    $('#values').load("/api/values");
+		    $('#values').load("/values/single");
 		});
 
 		$("#dataButton").click(function () {
-		$.get( "/api/values", {x: $('#x_input').val(), y: $('#y_input').val()} )
+		$.get( "/values/single", {x: $('#x_input').val(), y: $('#y_input').val()} )
 			.done(function( data ) {
 			    $('#values').html( data );
 			});

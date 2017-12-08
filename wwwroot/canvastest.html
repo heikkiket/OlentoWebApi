@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <title>CanvasTest</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
 	$(document).ready(function(){
 		$("#testButton").click(function () {
-		    $('#values').load("/api/values");
+		    $('#values').load("/values/single");
 		});
         });
     </script>
@@ -20,33 +20,33 @@
 	</canvas>
 
     <script>
-    
+
         var drawCanvas = document.getElementById('drawCanvas');
         var context = drawCanvas.getContext('2d');
-        
+
         var canvasWidth = drawCanvas.width;
         var canvasHeight = drawCanvas.height;
-        
+
         var r = 0;
         var g = 0;
         var b = 0;
-    
-        var requestAnimationFrame = window.requestAnimationFrame || 
-                            window.mozRequestAnimationFrame || 
-                            window.webkitRequestAnimationFrame || 
+
+        var requestAnimationFrame = window.requestAnimationFrame ||
+                            window.mozRequestAnimationFrame ||
+                            window.webkitRequestAnimationFrame ||
                             window.msRequestAnimationFrame;
-    
+
         function draw() {
-            
+
             context.clearRect(0, 0, canvasWidth, canvasHeight);
-            
-            
+
+
             context.fillStyle = 'rgb(' + r + ',' + g + ',' + b + ')';
             context.fillRect(0, 0, canvasWidth, canvasHeight);
-                
+
             requestAnimationFrame(draw);
         }
-        
+
         function getMousePos(canvas, evt) {
             var rect = canvas.getBoundingClientRect();
             return {
@@ -54,14 +54,14 @@
             y: evt.clientY - rect.top
             };
         }
-        
+
         drawCanvas.addEventListener('mousemove', function(evt) {
             var mousePos = getMousePos(drawCanvas, evt);
             getColor(mousePos.x, mousePos.y);
         }, false);
-        
+
         function getColor(x, y) {
-            $.get( "/api/values", {x: x, y: y|0} )
+            $.get( "/values/single", {x: x, y: y|0} )
             .done(function( data ) {
                 var color = JSON.parse(data);
                 console.log("x: " + x + "y:" + y + "c:" + data);
@@ -70,8 +70,8 @@
                 b = color.b;
             });
         }
-        
-        
+
+
         draw();
     </script>
 </body>
