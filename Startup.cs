@@ -28,8 +28,11 @@ namespace OlentoWebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-			// Add framework services.
-			services.AddDbContext<ValuesContext>(opt => opt.UseInMemoryDatabase("ValuesList"));
+			      // Add framework services.
+            string connection = Configuration
+              .GetConnectionString("OlentoServerConnection");
+            services.AddDbContext<ValuesContext>(options => options.UseMySQL(connection));
+
             services.AddMvc();
         }
 
