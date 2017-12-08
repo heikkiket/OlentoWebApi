@@ -3,16 +3,16 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <meta charset="utf-8" />
-    <title>Olento API test</title>
+    <title>Olento inmemory Database</title>
 
 	<script type="text/javascript">
 	$(document).ready(function(){
 		$("#testButton").click(function () {
-		    $('#values').load("/values/single");
+		    $('#values').load("/values/");
 		});
 
 		$("#dataButton").click(function () {
-		$.get( "/values/single", {x: $('#x_input').val(), y: $('#y_input').val()} )
+		$.get( "/values/single/"$('#id_input').val())
 			.done(function( data ) {
 			    $('#values').html( data );
 			});
@@ -25,9 +25,9 @@
 	<h1>Testi</h1>
 	<p id="values"></p>
         <button id="testButton">Get values</button>
-	<input id="x_input" type="number" name="x" />
-        <input id="y_input" type="number" name="y" />
+        <a href="/values">Values in API</a>
 
-	<button id="dataButton">Get values 2</button>
+        <input id="id_input" type="number" name="x" />
+        <button id="dataButton">Get Id</button>
 </body>
 </html>
