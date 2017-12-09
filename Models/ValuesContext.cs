@@ -11,5 +11,19 @@ namespace OlentoWebApi.Models
 
 		public DbSet<ValuesItem> ValuesItems { get; set; }
 
+		public static class ValuesContextFactory
+		{
+			public static ValuesContext Create(string connectionString)
+			{
+				var OptionsBuilder = new DbContextOptionsBuilder<ValuesContext>();
+				OptionsBuilder.UseMySQL(connectionString);
+
+				var context = new ValuesContext(OptionsBuilder.Options);
+				context.Database.EnsureCreated();
+
+				return context;
+			}
+		}
+
 	}
 }
