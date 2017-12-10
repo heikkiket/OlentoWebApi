@@ -13,9 +13,9 @@ namespace OlentoWebApi.Controllers
     public class ValuesController : Controller
     {
 
-		private readonly ValuesContext _context;
+		private readonly ViivaContext _context;
 
-		public ValuesController(ValuesContext context)
+		public ValuesController(ViivaContext context)
 		{
 			_context = context;
 

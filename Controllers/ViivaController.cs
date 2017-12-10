@@ -1,0 +1,98 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using OlentoWebApi.Models;
+
+
+namespace OlentoWebApi.Controllers
+{
+
+    [Route("[controller]")]
+    public class ViivaController : Controller
+    {
+
+		private readonly ViivaContext _context;
+
+		public ViivaController(ViivaContext context)
+		{
+			_context = context;
+
+			if (_context.viivat.Count() == 0)
+			{
+			
+				_context.viivat.Add(
+                                    new Viiva{
+                                        kalibroinnin_vari = new Vari{r=5,g=6,b=50}, 
+                                        siivut = new List<Siivu>()
+                                    }
+                                );
+                                
+                                
+				_context.SaveChanges();
+                _context.viivat.Last().siivut.Add(new Siivu{vari = new Vari{r=42}});
+				_context.SaveChanges();
+			}
+		}
+
+        //tee väristä JSON-objekti
+        string rgbAsJSON(uint r, uint g, uint b) {
+            return(
+                "{"
+                + "\"r\":" + r.ToString() + ", "
+                + "\"g\":" + g.ToString() + ", "
+                + "\"b\":" + b.ToString()
+                + "}"
+                );
+        }
+
+				[HttpGet]
+				public IEnumerable<Viiva> GetAll()
+				{
+				    return _context.viivat.ToList();
+				}
+
+				[HttpGet("single/{id}", Name = "GetViiva")]
+				public IActionResult GetById(long id) {
+					var item = _context.viivat.FirstOrDefault(t => t.Id == id);
+					if (item == null)
+					{
+						return NotFound();
+					}
+					return new ObjectResult(item);
+				}
+
+        //esim. GET values/single?x=5&y=3
+        [HttpGet("single")]
+        public string GetByCoords(float x = 0, float y = 0)
+        {
+            //lasketaan väri koordinaattien mukaan
+            uint r = (uint)x;
+            uint g = (uint)y;
+            uint b = r + g;
+
+            //värin rajatarkistus: r, g, b = {0...255}
+            if(r > 255)	r = 255;
+            if(g > 255)	g = 255;
+            if(b > 255)	b = 255;
+
+            //palautetaan väri json-muodossa
+            return rgbAsJSON(r,g,b);
+        }
+
+				[HttpPost]
+				public IActionResult Create([FromBody] Viiva item)
+				{
+					if (item == null)
+					{
+						return BadRequest();
+					}
+
+					_context.viivat.Add(item);
+					_context.SaveChanges();
+
+					return CreatedAtRoute("GetValue", new { id = item.Id }, item);
+				}
+			}
+}

@@ -29,7 +29,7 @@ namespace OlentoWebApi
         public void ConfigureServices(IServiceCollection services)
         {
 			// Add framework services.
-			services.AddDbContext<ValuesContext>(opt => opt.UseInMemoryDatabase("ValuesList"));
+			services.AddDbContext<ViivaContext>(opt => opt.UseInMemoryDatabase("ValuesList"));
             services.AddMvc();
         }
 
