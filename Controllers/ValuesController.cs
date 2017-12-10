@@ -19,6 +19,8 @@ namespace OlentoWebApi.Controllers
 		{
 			_context = context;
 
+      _context.Database.EnsureCreated();
+
 			if (_context.ValuesItems.Count() == 0)
 			{
 				_context.ValuesItems.Add(new ValuesItem { x = 42 });
