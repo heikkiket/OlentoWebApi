@@ -19,6 +19,7 @@ namespace OlentoWebApi
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile("mysql.json", optional: false)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -29,6 +30,11 @@ namespace OlentoWebApi
         public void ConfigureServices(IServiceCollection services)
         {
 			      // Add framework services.
+            var sqlConnectionString = Configuration.GetConnectionString("OlentoMysqlConnection");
+
+            services.AddDbContext<ValuesContext>(options =>
+                options.UseMySQL(sqlConnectionString)
+            );
 
             services.AddMvc();
         }
