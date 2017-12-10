@@ -19,6 +19,7 @@ namespace OlentoWebApi
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile("mysql.json", optional: false)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -28,8 +29,13 @@ namespace OlentoWebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-			// Add framework services.
-			services.AddDbContext<ValuesContext>(opt => opt.UseInMemoryDatabase("ValuesList"));
+			      // Add framework services.
+            var sqlConnectionString = Configuration.GetConnectionString("OlentoMysqlConnection");
+
+            services.AddDbContext<ValuesContext>(options =>
+                options.UseMySql(sqlConnectionString)
+            );
+
             services.AddMvc();
         }
 
