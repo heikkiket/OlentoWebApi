@@ -33,7 +33,7 @@ namespace OlentoWebApi
             var sqlConnectionString = Configuration.GetConnectionString("OlentoMysqlConnection");
 
             services.AddDbContext<ValuesContext>(options =>
-                options.UseMySQL(sqlConnectionString)
+                options.UseMySql(sqlConnectionString)
             );
 
             services.AddMvc();
