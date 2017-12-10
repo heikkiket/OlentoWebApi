@@ -29,9 +29,6 @@ namespace OlentoWebApi
         public void ConfigureServices(IServiceCollection services)
         {
 			      // Add framework services.
-            string connection = Configuration
-              .GetConnectionString("OlentoServerConnection");
-            services.AddDbContext<ValuesContext>(options => options.UseMySQL(connection));
 
             services.AddMvc();
         }

@@ -9,6 +9,17 @@ namespace OlentoWebApi.Models
 		{
 		}
 
+		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		{
+			var builder = new ConfigurationBuilder()
+		 .AddJsonFile("../appsettings.json")
+		 .AddEnvironmentVariables();
+			var configuration = builder.Build();
+
+			var sqlConnectionString = configuration["ConnectionStrings:OlentoServerConnection"];
+
+			optionsBuilder.UseSqlite(sqlConnectionString);
+		}
 		public DbSet<ValuesItem> ValuesItems { get; set; }
 
 		public static class ValuesContextFactory
